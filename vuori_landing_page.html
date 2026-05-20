@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Built for What Vuori Is Building Next</title>
+  <!-- Plus Jakarta Sans — Enterprise SaaS Mobile pairing from UI/UX Pro Max -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── DESIGN TOKENS (UI/UX Pro Max: Enterprise SaaS + AI-Native UI) ── */
+    :root {
+      /* Brand */
+      --sf-navy:       #032D60;
+      --sf-blue:       #0176D3;
+      --sf-sky:        #1B96FF;
+      --sf-teal:       #06A59A;
+      /* AI-Native accent from skill */
+      --ai-accent:     #6366F1;
+      --ai-glow:       rgba(99,102,241,0.18);
+      /* Neutrals */
+      --bg:            #F8F9FC;
+      --surface:       #FFFFFF;
+      --border:        #E2E8F0;
+      --text:          #0F172A;
+      --muted:         #475569;
+      --subtle:        #94A3B8;
+      /* Skill design system variables */
+      --card-padding:  2rem;
+      --card-radius:   12px;
+      --icon-size:     48px;
+      --grid-gap:      2rem;
+      --section-pad:   5rem 3rem;
+      --hover-lift:    translateY(-4px);
+      --easing:        cubic-bezier(0.16, 1, 0.3, 1);
+      /* Pain / alert */
+      --danger:        #EF4444;
+      --danger-bg:     #FEF2F2;
+      --danger-border: #FECACA;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s var(--easing), transform 0.6s var(--easing);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--sf-navy);
+      padding: 18px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .logo {
+      color: white;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .logo span { color: var(--sf-sky); }
+    .cta-pill {
+      background: var(--sf-sky);
+      color: white;
+      padding: 9px 22px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s var(--easing), box-shadow 0.2s;
+      box-shadow: 0 0 0 0 rgba(27,150,255,0);
+    }
+    .cta-pill:hover {
+      background: #0060C0;
+      box-shadow: 0 4px 16px rgba(27,150,255,0.35);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(140deg, #020E24 0%, #032D60 45%, #0A3D74 75%, #0B4F8A 100%);
+      color: white;
+      padding: 108px 48px 96px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Ambient blob 1 */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -60px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--ai-glow) 0%, transparent 65%);
+      border-radius: 50%;
+      animation: blob-drift 12s ease-in-out infinite alternate;
+    }
+    /* Ambient blob 2 */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(27,150,255,0.12) 0%, transparent 65%);
+      border-radius: 50%;
+      animation: blob-drift 16s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes blob-drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(30px, 20px) scale(1.08); }
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sf-sky);
+      background: rgba(27,150,255,0.12);
+      border: 1px solid rgba(27,150,255,0.25);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      max-width: 800px;
+      margin: 0 auto 24px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--sf-sky), var(--ai-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.72);
+      max-width: 600px;
+      margin: 0 auto 44px;
+      line-height: 1.7;
+    }
+    .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      background: var(--sf-sky);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s var(--easing), box-shadow 0.2s, transform 0.15s var(--easing);
+      box-shadow: 0 4px 14px rgba(27,150,255,0.3);
+    }
+    .btn-primary:hover {
+      background: #0060C0;
+      box-shadow: 0 6px 20px rgba(27,150,255,0.45);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: white;
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s var(--easing);
+      backdrop-filter: blur(4px);
+      background: rgba(255,255,255,0.05);
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: var(--section-pad); }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ai-accent);
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: var(--sf-navy);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 660px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    /* ── PAIN CARDS (Feature Showcase grid) ── */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--grid-gap);
+    }
+    .pain-card {
+      background: var(--surface);
+      border: 1px solid var(--danger-border);
+      border-top: 3px solid var(--danger);
+      border-radius: var(--card-radius);
+      padding: var(--card-padding);
+      transition: transform 0.25s var(--easing), box-shadow 0.25s var(--easing);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .pain-card:hover {
+      transform: var(--hover-lift);
+      box-shadow: 0 12px 32px rgba(239,68,68,0.1);
+    }
+    .pain-card .label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--danger);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pain-card .label::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--danger);
+      border-radius: 50%;
+    }
+    .pain-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .pain-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .quote-bar {
+      background: var(--surface);
+      border-left: 3px solid var(--ai-accent);
+      border-radius: 0 8px 8px 0;
+      padding: 22px 28px;
+      margin-top: 40px;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 0.975rem;
+      line-height: 1.7;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .quote-bar cite {
+      display: block;
+      margin-top: 10px;
+      font-style: normal;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--sf-navy);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── PRODUCT CARDS ── */
+    .bg-light { background: var(--surface); }
+    .product-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--grid-gap);
+      margin-top: 16px;
+    }
+    @media (max-width: 720px) { .product-split { grid-template-columns: 1fr; } }
+    .product-card {
+      border-radius: var(--card-radius);
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s var(--easing), box-shadow 0.25s var(--easing);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .product-card:hover {
+      transform: var(--hover-lift);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+    }
+    .product-card.cimulate {
+      background: linear-gradient(150deg, #F0FDFA 0%, #ECFDF5 100%);
+      border-top: 3px solid var(--sf-teal);
+    }
+    .product-card.storefront {
+      background: linear-gradient(150deg, #EEF2FF 0%, #E0E7FF 100%);
+      border-top: 3px solid var(--ai-accent);
+    }
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 18px;
+    }
+    .cimulate .product-badge { background: var(--sf-teal); color: white; }
+    .storefront .product-badge { background: var(--ai-accent); color: white; }
+    .product-card h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--sf-navy);
+      margin-bottom: 10px;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+    .product-card .tagline {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .feature-list { list-style: none; }
+    .feature-list li {
+      padding: 9px 0;
+      font-size: 0.875rem;
+      color: var(--text);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list li::before {
+      content: '✓';
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 0.8rem;
+    }
+    .cimulate .feature-list li::before { color: var(--sf-teal); }
+    .storefront .feature-list li::before { color: var(--ai-accent); }
+
+    /* ── METRIC CARDS (stat counter animated) ── */
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .insight-card {
+      background: var(--surface);
+      border-radius: var(--card-radius);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: transform 0.25s var(--easing), box-shadow 0.25s var(--easing);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .insight-card:hover {
+      transform: var(--hover-lift);
+      box-shadow: 0 12px 32px rgba(6,165,154,0.12);
+    }
+    .insight-card .stat {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--sf-teal);
+      line-height: 1;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+      transition: color 0.3s;
+    }
+    .insight-card:hover .stat { color: var(--ai-accent); }
+    .insight-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── SEARCH FAILURES ── */
+    .search-failures {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 2rem;
+      margin-top: 40px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .search-failures h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--sf-navy);
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .failure-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+      transition: background 0.15s;
+    }
+    .failure-row:last-child { border-bottom: none; }
+    .failure-row:hover { background: var(--bg); margin: 0 -2rem; padding: 14px 2rem; border-radius: 4px; }
+    .failure-row .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    .failure-row strong { display: block; color: var(--text); margin-bottom: 3px; font-weight: 700; }
+    .failure-row span { color: var(--muted); line-height: 1.5; }
+
+    /* ── COMPARISON TABLE ── */
+    .comparison-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 40px;
+      font-size: 0.875rem;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .comparison-table th {
+      padding: 14px 20px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .comparison-table th:first-child { background: #F1F5F9; color: var(--muted); }
+    .comparison-table th.shopify-col { background: #F1F5F9; color: #64748B; border-left: 1px solid var(--border); }
+    .comparison-table th.sf-col {
+      background: var(--sf-navy);
+      color: white;
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+    .comparison-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table td:first-child {
+      font-weight: 600;
+      color: var(--sf-navy);
+      background: #F8FAFC;
+      font-size: 0.82rem;
+      letter-spacing: 0.01em;
+    }
+    .comparison-table td.shopify-val {
+      color: #94A3B8;
+      border-left: 1px solid var(--border);
+      background: #FAFBFC;
+    }
+    .comparison-table td.sf-val {
+      color: var(--text);
+      border-left: 1px solid var(--border);
+      background: #F0F9FF;
+    }
+    .comparison-table .sf-val .highlight {
+      color: var(--sf-blue);
+      font-weight: 700;
+    }
+    .comparison-table tr:hover td { filter: brightness(0.975); }
+
+    /* ── VIBE CODING (dark glassmorphism section) ── */
+    .bg-navy {
+      background: linear-gradient(140deg, #020E24 0%, #032D60 50%, #0A1A40 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .bg-navy::before {
+      content: '';
+      position: absolute;
+      top: 30%; right: -100px;
+      width: 450px; height: 450px;
+      background: radial-gradient(circle, var(--ai-glow) 0%, transparent 60%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .bg-navy h2 { color: white; }
+    .bg-navy .section-label { color: var(--sf-sky); }
+    .bg-navy .section-sub { color: rgba(255,255,255,0.65); }
+    .vibe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+      position: relative;
+    }
+    .vibe-card {
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--card-radius);
+      padding: 28px 24px;
+      backdrop-filter: blur(12px);
+      transition: transform 0.25s var(--easing), background 0.2s, box-shadow 0.25s;
+    }
+    .vibe-card:hover {
+      transform: var(--hover-lift);
+      background: rgba(255,255,255,0.09);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(99,102,241,0.3);
+    }
+    .vibe-card .tool {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sf-sky);
+      margin-bottom: 10px;
+    }
+    .vibe-card h3 { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 8px; }
+    .vibe-card p { font-size: 0.85rem; color: rgba(255,255,255,0.58); line-height: 1.6; }
+    .vibe-quote {
+      background: rgba(255,255,255,0.055);
+      border-left: 3px solid var(--ai-accent);
+      border-radius: 0 8px 8px 0;
+      padding: 24px 28px;
+      margin-top: 40px;
+      font-style: italic;
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      line-height: 1.7;
+      backdrop-filter: blur(8px);
+      position: relative;
+    }
+    .vibe-quote cite {
+      display: block;
+      margin-top: 10px;
+      font-style: normal;
+      font-size: 0.8rem;
+      color: var(--sf-sky);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── SOCIAL PROOF ── */
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .proof-card {
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: var(--card-padding);
+      background: var(--surface);
+      transition: transform 0.25s var(--easing), box-shadow 0.25s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .proof-card:hover {
+      transform: var(--hover-lift);
+      box-shadow: 0 12px 32px rgba(1,118,211,0.1);
+    }
+    .proof-card .brand {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sf-blue);
+      margin-bottom: 10px;
+    }
+    .proof-card .result {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--sf-navy);
+      line-height: 1.1;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .proof-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.55; }
+    .lululemon-callout {
+      background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
+      border: 1px solid #C7D2FE;
+      border-radius: var(--card-radius);
+      padding: 24px 32px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.925rem;
+      color: var(--sf-navy);
+      line-height: 1.6;
+    }
+    .lululemon-callout strong { font-weight: 800; color: var(--ai-accent); }
+    .lululemon-callout .icon { font-size: 1.4rem; flex-shrink: 0; }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0;
+      margin-top: 40px;
+    }
+    .timeline-step {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-right: none;
+      background: var(--surface);
+      position: relative;
+      transition: background 0.2s;
+    }
+    .timeline-step:hover { background: #F8FAFF; }
+    .timeline-step:last-child { border-right: 1px solid var(--border); }
+    .timeline-step:first-child { border-radius: var(--card-radius) 0 0 var(--card-radius); }
+    .timeline-step:last-child { border-radius: 0 var(--card-radius) var(--card-radius) 0; }
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--sf-blue), var(--ai-accent));
+      color: white;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+    }
+    .step-phase {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ai-accent);
+      margin-bottom: 6px;
+    }
+    .timeline-step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--sf-navy);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .timeline-step p { font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
+    @media (max-width: 720px) {
+      .timeline-step { border-right: 1px solid var(--border); border-bottom: none; }
+      .timeline-step:last-child { border-bottom: 1px solid var(--border); }
+      .timeline-step:first-child { border-radius: var(--card-radius) var(--card-radius) 0 0; }
+      .timeline-step:last-child { border-radius: 0 0 var(--card-radius) var(--card-radius); }
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(140deg, #020E24 0%, #032D60 50%, #0A1A40 100%);
+      color: white;
+      text-align: center;
+      padding: 108px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, var(--ai-glow) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      color: white;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.68);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto 44px;
+      line-height: 1.7;
+      position: relative;
+    }
+    .cta-cards {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+      position: relative;
+    }
+    .cta-card {
+      background: rgba(255,255,255,0.065);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: var(--card-radius);
+      padding: 20px 24px;
+      text-align: left;
+      min-width: 195px;
+      backdrop-filter: blur(12px);
+      transition: background 0.2s, transform 0.2s var(--easing);
+    }
+    .cta-card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-3px);
+    }
+    .cta-card .event-date {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sf-sky);
+      margin-bottom: 5px;
+    }
+    .cta-card h4 { font-size: 0.92rem; font-weight: 700; color: white; margin-bottom: 5px; }
+    .cta-card p { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin: 0; line-height: 1.5; }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #010B1E;
+      color: rgba(255,255,255,0.38);
+      text-align: center;
+      padding: 22px 48px;
+      font-size: 0.78rem;
+    }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    footer a:hover { color: white; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      header { padding: 14px 20px; }
+      section { padding: 56px 20px; }
+      .hero { padding: 80px 20px 72px; }
+      .cta-section { padding: 80px 20px; }
+      h2 { letter-spacing: -0.015em; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Salesforce <span>Commerce Cloud</span></div>
+  <a href="#contact" class="cta-pill">Schedule a Briefing</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Prepared exclusively for Vuori</div>
+    <h1>You're thinking about <em>building your own platform.</em><br>We already built it.</h1>
+    <p class="sub">Open-source. Composable. AI-native from the ground up. And you've already seen the intelligence layer work with your own catalog data.</p>
+    <div class="hero-ctas">
+      <a href="#cimulate" class="btn-primary">See CommerceGPT in Action</a>
+      <a href="#storefront" class="btn-ghost">Explore Storefront Next</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section>
+  <div class="section-inner">
+    <div class="section-label">The Challenge</div>
+    <h2>Vuori has outgrown what Shopify was built for</h2>
+    <p class="section-sub">Shopify was designed for ecommerce. You've scaled it to 100+ stores, 18+ countries, and $600M+ in revenue — and the seams are showing.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="label">Global Scale</div>
+        <h3>A separate Shopify catalog for every country</h3>
+        <p>At 15+ international sites, you're managing 15x the manual overhead — separate catalog instances, no shared codebase, no unified data. Every new market launch compounds the complexity.</p>
+      </div>
+      <div class="pain-card">
+        <div class="label">App Sprawl</div>
+        <h3>40+ disconnected apps creating data plumbing problems</h3>
+        <p>Your stack is held together by custom middleware and third-party apps that weren't designed to work together. The fragility increases with every new integration.</p>
+      </div>
+      <div class="pain-card">
+        <div class="label">Retail Operations</div>
+        <h3>A POS built for ecom, bolted onto 100+ stores</h3>
+        <p>No unified OMS, no BOPIS, no cross-channel inventory visibility. Associates rely on manual tools. VIP customers aren't recognized across channels.</p>
+      </div>
+      <div class="pain-card">
+        <div class="label">Product Discovery</div>
+        <h3>Search that fails when customers need it most</h3>
+        <p>Intent-based queries ("something for a summer evening"), brand + product combinations, and simple typos all return poor or zero results — on a catalog that's expanding into denim, accessories, and new categories.</p>
+      </div>
+    </div>
+
+    <div class="quote-bar">
+      "Shopify was built for ecom and kind of bolted on things to make it work for retail, but wasn't natively built in that way... It can feel like we're out over our skis a little bit at some points."
+      <cite>— John Murphy, Sr. Manager Retail Analytics, Vuori · April 2026</cite>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT OVERVIEW -->
+<section style="background: var(--bg)">
+  <div class="section-inner">
+    <div class="section-label">The Answer</div>
+    <h2>Two innovations. One platform built for your next decade.</h2>
+    <p class="section-sub">Neither is a feature added to an existing product. Both were built from the ground up for AI-native enterprise commerce.</p>
+
+    <div class="product-split">
+      <div class="product-card cimulate" id="cimulate">
+        <div class="product-badge">Cimulate · CommerceGPT</div>
+        <h3>The industry's only intent-aware context engine for product discovery</h3>
+        <p class="tagline">A Commerce GPT small language model built bespoke to your brand — trained on your catalog, your customers, your business rules.</p>
+        <ul class="feature-list">
+          <li>No replatform required — deploys over your existing Shopify + Algolia stack</li>
+          <li>Understands shopper intent, not just keywords — "flowy top for a dinner out" returns results</li>
+          <li>Eliminates thousands of manual merchandising rules automatically</li>
+          <li>Powers Personal Shopper, Search, and Merchandising from a single model</li>
+          <li>GA July 2026, natively integrated in B2C Commerce</li>
+          <li>You've already seen it run with your actual catalog data</li>
+        </ul>
+      </div>
+
+      <div class="product-card storefront" id="storefront">
+        <div class="product-badge">Storefront Next</div>
+        <h3>The composable, AI-native storefront built for enterprise scale</h3>
+        <p class="tagline">Open-source on GitHub. Stand up in under 30 minutes. 30–50% faster to implement than a custom build. Built natively for vibe coding.</p>
+        <ul class="feature-list">
+          <li>Single shared codebase supports 60+ languages, 150+ currencies</li>
+          <li>Launch new international sites in weeks, not months</li>
+          <li>Open-source composable architecture — the flexibility of "build your own" with enterprise infrastructure you don't have to maintain</li>
+          <li>Natively supports AI agent experiences in the storefront layer</li>
+          <li>99.9% contractual SLA — not a blog post promise</li>
+          <li>Agentforce Buyer included out of the box</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CIMULATE DEEP DIVE -->
+<section>
+  <div class="section-inner">
+    <div class="section-label">CommerceGPT — Your Brand's AI Model</div>
+    <h2>A search intelligence engine trained on Vuori — not a generic AI</h2>
+    <p class="section-sub">Unlike off-the-shelf AI search tools, CommerceGPT builds a bespoke small language model for your brand. It learns Vuori's catalog semantics, customer intent patterns, and merchandising logic — then applies that model across every discovery surface.</p>
+
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="stat">84</div>
+        <p>Merchandising rules after CommerceGPT — down from 1,700 at a comparable apparel retailer</p>
+      </div>
+      <div class="insight-card">
+        <div class="stat">+12%</div>
+        <p>Revenue per user lift at a comparable apparel brand after switching from keyword-based search</p>
+      </div>
+      <div class="insight-card">
+        <div class="stat">86%</div>
+        <p>Reduction in time-to-task for merchandising operations with AI-assisted configuration</p>
+      </div>
+      <div class="insight-card">
+        <div class="stat">3 surfaces</div>
+        <p>One brand model powering Personal Shopper, Search, and Merchandising — not three separate tools</p>
+      </div>
+    </div>
+
+    <div class="search-failures">
+      <h3>Search failures identified on Vuori's current Algolia implementation</h3>
+      <div class="failure-row">
+        <div class="icon">🔍</div>
+        <div>
+          <strong>Intent-based queries return nothing useful</strong>
+          <span>"Bodycon top," "flowy top," "something for pilates" — Algolia matches keywords. CommerceGPT matches intent.</span>
+        </div>
+      </div>
+      <div class="failure-row">
+        <div class="icon">🏷️</div>
+        <div>
+          <strong>Brand + product queries break entirely</strong>
+          <span>"Vuori tennis skirt" returns no useful results. Your own brand name breaks your own search.</span>
+        </div>
+      </div>
+      <div class="failure-row">
+        <div class="icon">✏️</div>
+        <div>
+          <strong>Typo tolerance fails on product-specific terms</strong>
+          <span>"Four inch shorts" vs "4" shorts" — minor format variation returns completely different results.</span>
+        </div>
+      </div>
+      <div class="failure-row">
+        <div class="icon">📍</div>
+        <div>
+          <strong>Geo-based personalization is completely untapped</strong>
+          <span>A customer in Seoul sees the same results as one in San Diego. CommerceGPT surfaces contextually relevant products based on location, climate, and behavior.</span>
+        </div>
+      </div>
+      <div class="failure-row">
+        <div class="icon">🚫</div>
+        <div>
+          <strong>Out-of-stock products appearing in results</strong>
+          <span>No availability filtering — customers hit dead ends after clicking through. CommerceGPT applies real-time inventory awareness across all discovery surfaces.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STOREFRONT NEXT COMPARISON -->
+<section class="bg-light">
+  <div class="section-inner">
+    <div class="section-label">Storefront Next vs. Shopify Plus</div>
+    <h2>Built for where Vuori is going, not where you've been</h2>
+    <p class="section-sub">At 100+ stores across 18+ countries, with an IPO on the horizon, your commerce infrastructure needs to be a competitive advantage — not a constraint.</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="shopify-col">Shopify Plus</th>
+          <th class="sf-col">Storefront Next</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>International architecture</td>
+          <td class="shopify-val">Separate catalog and instance per geography — 15+ sites = 15x manual overhead</td>
+          <td class="sf-val"><span class="highlight">Single shared codebase</span> with localized data — launch new countries in weeks</td>
+        </tr>
+        <tr>
+          <td>AI capabilities</td>
+          <td class="shopify-val">Shopify Magic — AI features retrofitted onto existing data model</td>
+          <td class="sf-val"><span class="highlight">CommerceGPT + Agentforce Buyer</span> — AI-native from the data model up</td>
+        </tr>
+        <tr>
+          <td>Developer experience</td>
+          <td class="shopify-val">Controlled SaaS — Liquid templating, limited server configuration</td>
+          <td class="sf-val"><span class="highlight">Open-source on GitHub</span> — stand up in &lt;30 min, vibe-code with Claude/Cursor/Codex</td>
+        </tr>
+        <tr>
+          <td>Uptime guarantee</td>
+          <td class="shopify-val">No formal SLA — informal 99.99% claim, not contractual</td>
+          <td class="sf-val"><span class="highlight">99.9% contractual SLA</span> — enterprise-grade reliability for peak drop events</td>
+        </tr>
+        <tr>
+          <td>Data unification</td>
+          <td class="shopify-val">No native CDP — fragile custom middleware to NetSuite and third-party apps</td>
+          <td class="sf-val"><span class="highlight">Data Cloud as central nervous system</span> — unified customer profiles across all channels</td>
+        </tr>
+        <tr>
+          <td>Implementation speed</td>
+          <td class="shopify-val">Baseline: weeks to months depending on customization</td>
+          <td class="sf-val"><span class="highlight">30–50% faster</span> than custom builds — proven with production deployments</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- VIBE CODING -->
+<section class="bg-navy">
+  <div class="section-inner">
+    <div class="section-label">For Your Engineering Team</div>
+    <h2>The first enterprise commerce platform built natively for vibe coding</h2>
+    <p class="section-sub">Storefront Next is the only enterprise commerce storefront designed from the ground up to work with the AI coding tools your engineers already use. Ship faster. Spend less time on boilerplate. Let your team focus on differentiation.</p>
+
+    <div class="vibe-grid">
+      <div class="vibe-card">
+        <div class="tool">Claude Code</div>
+        <h3>Conversational development</h3>
+        <p>Describe the component or feature you want in plain language. Claude understands Storefront Next's architecture and generates production-ready code that fits your existing patterns.</p>
+      </div>
+      <div class="vibe-card">
+        <div class="tool">Cursor</div>
+        <h3>In-editor AI assistance</h3>
+        <p>Cursor's codebase understanding works natively with Storefront Next's open-source structure. Your engineers get intelligent suggestions that understand the full context of the platform.</p>
+      </div>
+      <div class="vibe-card">
+        <div class="tool">Codex</div>
+        <h3>Automated code generation</h3>
+        <p>Use Codex to generate new pages, integrations, and customizations against Storefront Next's open-source repository — with the full component library and API surface available as context.</p>
+      </div>
+    </div>
+
+    <div class="vibe-quote">
+      "Storefront Next has really enabled the next level of our AI-driven methodology: using it, Claude Code and Figma in our workflow has allowed us to carve our front-end development cycle time in half."
+      <cite>Rob Smith, SVP Commerce, OSF Digital</cite>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section>
+  <div class="section-inner">
+    <div class="section-label">Who's Already There</div>
+    <h2>Enterprise brands that chose this path — and what happened</h2>
+    <p class="section-sub">Vuori won't be first. You'll be early enough to receive white-glove attention from a platform that's already proven at global enterprise scale.</p>
+
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="brand">LVMH</div>
+        <div class="result">€5B+ GMV</div>
+        <p>18-month evaluation. Chose Salesforce Commerce Cloud over Shopify in May 2026. Multi-brand, multi-market architecture at luxury scale.</p>
+      </div>
+      <div class="proof-card">
+        <div class="brand">Pandora</div>
+        <div class="result">18 countries in 4 months</div>
+        <p>Global rollout at a pace impossible on a per-catalog architecture. Composable design + Agentforce Agents driving the expansion.</p>
+      </div>
+      <div class="proof-card">
+        <div class="brand">AllSaints</div>
+        <div class="result">7x conversion increase</div>
+        <p>Post-migration to Agentforce Commerce. Comparable apparel brand with a global retail footprint.</p>
+      </div>
+      <div class="proof-card">
+        <div class="brand">Yoga Democracy</div>
+        <div class="result">86% faster site speed</div>
+        <p>3.9s → 529ms after migrating from Shopify. Completed in just 6 weeks. Activewear brand with a comparable DTC model.</p>
+      </div>
+    </div>
+
+    <div class="lululemon-callout">
+      <div class="icon">⚡</div>
+      <div><strong>Your direct competitor is already on Salesforce.</strong> Lululemon uses Salesforce for clienteling, loyalty, and omnichannel. If you're taking share from Lululemon in product, the infrastructure gap is a risk you don't want to carry into an IPO.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PATH FORWARD -->
+<section class="bg-light">
+  <div class="section-inner">
+    <div class="section-label">The Path Forward</div>
+    <h2>A sequenced approach built around zero disruption</h2>
+    <p class="section-sub">You don't have to choose between moving fast and moving safely. The recommended approach starts with immediate value — no replatform required — then sequences into the full strategic answer.</p>
+
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="step-num">1</div>
+        <div class="step-phase">Now → July 2026</div>
+        <h3>CommerceGPT as the wedge</h3>
+        <p>Refresh the August 2025 demo with your current catalog data. Deploy CommerceGPT directly over your existing Shopify + Algolia stack — no replatform, immediate search and discovery improvement. Eliminates one of your 40+ disconnected apps while dramatically improving results.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">2</div>
+        <div class="step-phase">June → Q3 2026</div>
+        <h3>Storefront Next evaluation</h3>
+        <p>See Storefront Next in a private briefing with your digital and technical leadership — the composable, open-source architecture directly addresses the "build vs. buy" question. Stand it up with your data in under 30 minutes.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">3</div>
+        <div class="step-phase">H2 FY27</div>
+        <h3>Full platform consolidation</h3>
+        <p>Replace your fragile app stack with Data Cloud as the central nervous system. One unified customer profile across 100+ stores, 18+ countries. Eliminate the middleware, the manual Excel forecasting, the data silos — and enter your IPO period on infrastructure that scales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Let's pick up where we left off</h2>
+  <p>Your team has already seen CommerceGPT work with your catalog. The only thing that's changed is it's now part of Salesforce, with enterprise SLAs and a July 2026 GA date.</p>
+
+  <div class="cta-cards">
+    <div class="cta-card">
+      <div class="event-date">June 3–4, 2026</div>
+      <h4>Connections · Chicago</h4>
+      <p>Storefront Next GA announcement — private engineering briefing available</p>
+    </div>
+    <div class="cta-card">
+      <div class="event-date">June 22–26, 2026</div>
+      <h4>Cannes Lions</h4>
+      <p>Executive meeting at Salesforce Beach — strategic platform conversation</p>
+    </div>
+    <div class="cta-card">
+      <div class="event-date">Anytime</div>
+      <h4>45-Minute Virtual Briefing</h4>
+      <p>Refreshed CommerceGPT demo with your current catalog data</p>
+    </div>
+  </div>
+
+  <div class="cta-buttons">
+    <a href="mailto:[your-email]" class="btn-primary">Request a Briefing</a>
+    <a href="#cimulate" class="btn-ghost">Review CommerceGPT</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Salesforce, Inc. · Prepared for Vuori · <a href="#">Privacy</a></p>
+</footer>
+
+<script>
+  // Scroll-reveal (UI/UX Pro Max UX guideline: smooth section transitions)
+  const revealEls = document.querySelectorAll(
+    '.pain-card, .product-card, .insight-card, .proof-card, .vibe-card, .timeline-step, .quote-bar, .search-failures, .lululemon-callout, .comparison-table, .cta-card'
+  );
+  revealEls.forEach((el, i) => {
+    el.classList.add('reveal');
+    if (i % 4 === 1) el.classList.add('reveal-delay-1');
+    if (i % 4 === 2) el.classList.add('reveal-delay-2');
+    if (i % 4 === 3) el.classList.add('reveal-delay-3');
+  });
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+    { threshold: 0.12 }
+  );
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
